@@ -21,7 +21,7 @@ int arr[size];
 void pushArray(int value) {
     if (arrayTop == size - 1) {
         cout << "Array Stack Overflow!\n";
-        return;
+        return; 
     }
     arr[++arrayTop] = value;
     cout << "Pushed " << value << " to array stack.\n";

@@ -140,7 +140,7 @@ BstNode* getSuccessor(BstNode* root, int data){
     if(current->right != NULL) {
     current =current->right;
     if(current->left  == NULL) return current;
-    while (current->left != NULL) current->left;
+    while (current->left != NULL) current = current->left;
     return current;
 }else{
     BstNode*successor = NULL;

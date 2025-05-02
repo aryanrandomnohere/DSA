@@ -130,6 +130,36 @@ BstNode* Delete(BstNode*root, int data){
     return root;
 }
 
+
+BstNode* getSuccessor(BstNode* root, int data){
+    BstNode* current = root;
+    while(current->data == data){
+        if(data > current->data) current = current->right;
+        else if(data< current->data) current = current->left;
+    }
+    if(current->right != NULL) {
+    current =current->right;
+    if(current->left  == NULL) return current;
+    while (current->left != NULL) current->left;
+    return current;
+}else{
+    BstNode*successor = NULL;
+    BstNode* ancestor = root;
+    while (ancestor != current){
+    if(current->data < ancestor->data){
+    successor = ancestor;
+                ancestor = ancestor->left;
+            }else{
+                ancestor = ancestor->right;
+            }
+    }
+        return successor;
+
+      
+}
+    
+}
+
 int main(){
     BstNode* root = NULL;
     cout<<"Binary Search Tree"<<"\n";
@@ -153,4 +183,6 @@ int main(){
     else cout<<"Binary tree is not valid";
     root = Delete(root,70);
     levelOrderTraversal(root);
+     BstNode*successor =  getSuccessor(root,69);
+    cout<<"The successor of "<< 69<<"is"<<successor->data;
 }       

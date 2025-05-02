@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Queue>
+#include <queue>
 using namespace std;
 struct BstNode {
     int data;
@@ -31,19 +31,19 @@ BstNode* Insert(BstNode* root,int x){
     return root;
 } 
 
-int FindMin(BstNode* root){
+BstNode* FindMin(BstNode* root){
     BstNode*current = root;
     while(current->left != NULL){
         current = current->left;
     }
-    return current->data;
+    return current;
 }
-int FindMax(BstNode* root){
+BstNode* FindMax(BstNode* root){
     BstNode* current = root;
     while(current->right != NULL){
         current = current->right;
     }
-    return current->data;
+    return current;
 }
 
 int FindHeight(BstNode* root){
@@ -59,7 +59,7 @@ queue<BstNode*> q;
     q.push(root);
 while(!q.empty()){
    BstNode* current =q.front();
-        cout<<"current->data"<<"\n";
+        cout<<current->data<<"\n";
         if(current->left != NULL) q.push(current->left);
         if(current->right != NULL) q.push(current->right);
         q.pop();
@@ -85,30 +85,49 @@ PostOrderTraversal(root->left);
 PostOrderTraversal(root->right);
 cout<<root->data;
 }
-
-bool isSubreeGreater(BstNode* root,int Value){
-    if(root == NULL) return true;
-    if(root->data< Value) return true;
-        return false;
-    
-}
-
-bool isLeftSubtreeBalanced(BstNode*root, int Value){
+bool isSubtreelesser(BstNode* root, int value){
 if(root == NULL) return true;
-    if(root->data <= value && isLeftSubtreeBalanced(root->left, root->data) &&isSubreeGreater(root->right,value)){
-        
-    }
+if(root->data <= value) return true;
+    return false;
 }
 
-bool checkBalanceofNode(BstNode*root){
-    if(root == NULL) return true;
-    BstNode* left = root->left;
-    BstNode* right = root->right;
-    if(root->data >= left->data){
-    return checkBalanceofNode(root->left);
+bool isSubtreeGreater(BstNode* root,int value){
+if(root == NULL) return true;
+    if(root->data > value) return true;
+    return false;
+}
+
+
+bool IsBinarySearchTree(BstNode* root){
+if(root== NULL) return true;
+    if(isSubtreelesser(root->left,root->data)&& isSubtreeGreater(root->right,root->data) && IsBinarySearchTree(root->left) && IsBinarySearchTree(root->right)) return true;
+    return false;
+}
+
+BstNode* Delete(BstNode*root, int data){
+    if(root == NULL) return root;
+    if(root->data > data ){ root->left = Delete(root->left, data);
+    } else if(root->data < data){ root->right = Delete(root->right, data);}
+    else if(root->left == NULL && root->right == NULL) {
+        delete root;
+        root = NULL;
+    }else if(root->right == NULL){
+         BstNode* temp = root;
+         root = root->left;
+         delete temp;
+    }else if(root->left == NULL){
+         BstNode* temp = root;    
+         root = root->right;
+         delete temp;
+     }else{
+        BstNode* temp = FindMin(root->right);
+        cout<<"Min element is: "<<temp->data<<endl;
+        root->data = temp->data;
+        root->right = Delete(root->right,temp->data);
     }
 
 
+    return root;
 }
 
 int main(){
@@ -118,13 +137,20 @@ int main(){
     root = Insert(root,10);
     root = Insert(root,20);
     root = Insert(root,1);
-    root =Insert(root,16);
+    root = Insert(root,16);
     root = Insert(root,21);
-    root= Insert(root,70);
+    root = Insert(root,70);
     root = Insert(root,69);
+    root = Insert(root,71);
     root = Insert(root,68);
     root = Insert(root,67);
     cout<<FindMin(root)<<endl;
     cout<<FindMax(root)<<endl;
     cout<<FindHeight(root)<<endl;
-}
+    levelOrderTraversal(root);
+    bool isValid =   IsBinarySearchTree(root);
+    if(isValid) cout<<"The binary tree is valid";
+    else cout<<"Binary tree is not valid";
+    root = Delete(root,70);
+    levelOrderTraversal(root);
+}       

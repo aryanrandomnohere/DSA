@@ -133,7 +133,7 @@ BstNode* Delete(BstNode*root, int data){
 
 BstNode* getSuccessor(BstNode* root, int data){
     BstNode* current = root;
-    while(current->data == data){
+    while(current->data != data){
         if(data > current->data) current = current->right;
         else if(data< current->data) current = current->left;
     }
@@ -185,4 +185,5 @@ int main(){
     levelOrderTraversal(root);
      BstNode*successor =  getSuccessor(root,69);
     cout<<"The successor of "<< 69<<"is"<<successor->data;
+    InorderTraversal(root);
 }       

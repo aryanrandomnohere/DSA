@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+using namespace std;
 int MaxPairwiseProduct(const std::vector<int>& numbers) {
     int max_product = 0;
     int n = numbers.size();
@@ -16,14 +16,33 @@ int MaxPairwiseProduct(const std::vector<int>& numbers) {
     return max_product;
 }
 
-int main() {
-    int n;
-    std::cin >> n;
-    std::vector<int> numbers(n);
-    for (int i = 0; i < n; ++i) {
-        std::cin >> numbers[i];
+int maximumPairwiseProduct(vector<int>number){
+int result = 0 ;
+int max_index1 = -1;
+    for(int i = 0 ; i<number.size(); i++){
+    if((number[i]>number[max_index1]) || max_index1 == -1){
+            max_index1 = i;
+        }
     }
+int max_index2 = -1;
+    for(int i = 0; i<number.size()-1; i++){
+        if(((i != max_index1) && max_index2 == -1 || number[i]>number[max_index2]) ){
+            max_index2 = i;
+        }
+    }
+    result = number[max_index2] * number[max_index1];
+    return result;
+}
 
-    std::cout << MaxPairwiseProduct(numbers) << "\n";
-    return 0;
+int main() {
+    cout<<"Enter the size of the array \n";
+    int n;
+    cin>>n;
+    vector<int> numbers(n);
+    cout<<"Enter the number frr pairing \n";
+    for(int i = 0; i<n; i++){
+    cin>>numbers[i];
+    };
+    int result = maximumPairwiseProduct(numbers);
+    cout<<"The Maximum Pairwise Product for the given numbers is "<<result;
 }

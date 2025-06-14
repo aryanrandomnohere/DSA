@@ -2,7 +2,7 @@
 #include <iostream>
 #include <climits>
 #include <vector>
-
+using namespace std;
 using std::vector;
 
 struct Segment {
@@ -11,10 +11,18 @@ struct Segment {
 
 vector<int> optimal_points(vector<Segment> &segments) {
   vector<int> points;
-  //write your code here
+  int last_point =-1;
+  sort(segments.begin(), segments.end(),[](Segment a, Segment b){
+    return a.end<b.end;
+  });
+  for(Segment s : segments){
+    if(last_point<s.start){
+      last_point = s.end;
+      points.push_back(s.end);
+    }
+  }
   for (size_t i = 0; i < segments.size(); ++i) {
-    points.push_back(segments[i].start);
-    points.push_back(segments[i].end);
+     points.push_back(segments[i].end);
   }
   return points;
 }

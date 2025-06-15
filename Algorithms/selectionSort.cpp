@@ -79,7 +79,7 @@ cin>>n;
         cout<<a[i]<<" ";
     }
     cout<<"Array after selection sort :"<<endl;
-    //selectionSort(a, n);
+    selectionSort(a, n);
     MergeSort(a,n);
      for(int i=0; i<n;i++){
         cout<<a[i]<<" ";

@@ -1,11 +1,26 @@
 #include <iostream>
 #include <vector>
-
+using namespace std;
 using std::vector;
 
 vector<int> optimal_summands(int n) {
   vector<int> summands;
-  //write your code here
+  int total_sum = 0;
+  for(int i=1; i<n;i++){
+    if((total_sum + i)<n){
+      summands.push_back(i);
+      total_sum += i;
+    }else if((total_sum + i) == n){
+      summands.push_back(i);
+      break;
+    }else if((total_sum +i)>n){
+      int diff = (total_sum + i) - n;
+      cout<<diff;
+      summands[summands.size()-1] += i-diff;
+      cout<<summands.back(); 
+      break;
+  }
+  }
   return summands;
 }
 

@@ -7,8 +7,12 @@
 using std::vector;
 using std::string;
 
+bool isGreater(string a, string b){
+  return a + b > b+a;
+}
+
 string largest_number(vector<string> a) {
-  //write your code here
+  std::sort(a.begin(),a.end(), isGreater);
   std::stringstream ret;
   for (size_t i = 0; i < a.size(); i++) {
     ret << a[i];

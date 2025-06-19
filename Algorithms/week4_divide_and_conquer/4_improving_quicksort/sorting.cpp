@@ -18,6 +18,12 @@ int partition2(vector<int> &a, int l, int r) {
   return j;
 }
 
+int partition3(vector<int> &a, int l, int r){
+int x = a[l];
+
+  return x;
+}
+
 void randomized_quick_sort(vector<int> &a, int l, int r) {
   if (l >= r) {
     return;

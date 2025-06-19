@@ -6,7 +6,19 @@ using std::vector;
 
 int binary_search(const vector<int> &a, int x) {
   int left = 0, right = (int)a.size(); 
-  //write your code here
+  int mid = left - (right -left)/2;
+  int result =-1;
+  while(left<=right){
+    if(a[mid] ==x){
+      result = mid;
+      right = mid -1;
+    }else if(a[mid]>x){
+      right  = mid -1;
+    }else if(a[mid]<x){
+      left = mid+1;
+    }
+  }
+  return result;
 }
 
 int linear_search(const vector<int> &a, int x) {

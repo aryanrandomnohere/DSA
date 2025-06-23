@@ -12,21 +12,30 @@ using std::max_element;
 
 class StackWithMax {
     vector<int> stack;
-
+    vector<int> max_stack;
   public:
 
     void Push(int value) {
         stack.push_back(value);
-    }
+        if(max_stack.empty()|| max_stack.back()<= value){
+            max_stack.push_back(value);
+        }    }
 
     void Pop() {
         assert(stack.size());
+        int back = stack.back();
         stack.pop_back();
+        if(max_stack.back() == back ){
+            max_stack.pop_back();
+        }
     }
 
     int Max() const {
         assert(stack.size());
         return *max_element(stack.begin(), stack.end());
+    }
+    int Max_Stack(){
+        return max_stack.back();
     }
 };
 
@@ -50,6 +59,7 @@ int main() {
         }
         else if (query == "max") {
             cout << stack.Max() << "\n";
+            cout<<stack.Max_Stack()<<std::endl;
         }
         else {
             assert(0);

@@ -30,7 +30,15 @@ public:
     {}
 
     Response Process(const Request &request) {
-        // write your code here
+         while(!finish_time_.empty() && finish_time_.back()<=request.arrival_time){
+            finish_time_.pop();
+        }
+        if(finish_time_.size()>= size_ ){
+            return Response(true,-1);
+        }
+        int start_time = finish_time_.empty() ? request.arrival_time : finish_time_.back() ;
+        finish_time_.push(start_time+request.process_time);
+        return Response(false,start_time);
     }
 private:
     int size_;

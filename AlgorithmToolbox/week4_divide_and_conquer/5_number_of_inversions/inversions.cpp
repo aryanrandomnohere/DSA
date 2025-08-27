@@ -6,7 +6,7 @@ using std::vector;
 long long merge_and_count(vector<int> a, vector<int> b, int left, int mid, int right){
   int i = left;
   int k = left;
-  int j = right;
+  int j = mid;
   long long inversions = 0;
   while(i<mid && j<right){
     if(a[i] < a[j]){

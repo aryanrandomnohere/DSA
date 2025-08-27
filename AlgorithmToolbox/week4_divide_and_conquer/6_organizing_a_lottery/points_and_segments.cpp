@@ -1,11 +1,18 @@
 #include <iostream>
 #include <vector>
 
-using std::vector;
+using std::vector, std::sort;
 
 vector<int> fast_count_segments(vector<int> starts, vector<int> ends, vector<int> points) {
   vector<int> cnt(points.size());
-  //write your code here
+  sort(starts.begin(), starts.end());
+  sort(ends.begin(), ends.end());
+  for(int i = 0; i<points.size(); i++){
+    int p = points[i];
+    int start_counts = std::upper_bound(starts.begin(), starts.end(), p) - starts.begin();
+    int end_counts =   std::lower_bound(ends.begin(),ends.end(),p) - ends.begin();
+    cnt[i] = start_counts - end_counts; 
+  } 
   return cnt;
 }
 
@@ -18,6 +25,8 @@ vector<int> naive_count_segments(vector<int> starts, vector<int> ends, vector<in
   }
   return cnt;
 }
+
+//Divide them then sort them after sorting sort points too nlogn alright now what we can do is
 
 int main() {
   int n, m;

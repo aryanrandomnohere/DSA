@@ -13,7 +13,8 @@ using std::min;
 
 
 double minimal_distance(vector<int> x, vector<int> y) {
-  //write your code here
+  std::sort(x.begin(), x.end());
+  
   return 0.;
 }
 
